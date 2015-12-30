@@ -22,6 +22,10 @@ class BatteryNotifier {
     handleTimeLeft(battery) {
         let secondsLeft = battery.dischargingTime;
 
+        if (typeof(secondsLeft) !== 'number') {
+            return;
+        }
+
         secondsLeft < this.minSeconds ? this.showNotification() : this.logRemainingTime(secondsLeft);
     }
 
@@ -40,7 +44,7 @@ class BatteryNotifier {
         let date = new Date(null);
             date.setSeconds(seconds);
 
-        let timeLeft = date.toISOString().substr(11, 8);
+        let timeLeft = date.toISOString().substr(11, 5) + " min";
 
         console.log(timeLeft);
     }

@@ -13,7 +13,9 @@ class BatteryNotifier {
 
     bindEvents() {
         navigator.getBattery().then((battery) => {
-           battery.ondischargingtimechange = this.handleTimeLeft(battery);
+           battery.addEventListener('dischargingtimechange', () => {
+               this.handleTimeLeft(battery);
+           });
        });
     }
 
